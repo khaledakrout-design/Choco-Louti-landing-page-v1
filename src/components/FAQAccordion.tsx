@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { VERIFIED_FAQ } from '../tokens/brand';
-import { FadeInUp } from './FadeInUp';
+import { ScrollReveal } from './ScrollReveal';
 
 export function FAQAccordion() {
   const [openId, setOpenId] = useState<string | null>(VERIFIED_FAQ[0].id);
@@ -17,7 +17,7 @@ export function FAQAccordion() {
       className="bg-[#DCE4D9]/55 text-[#3B241D] py-20 sm:py-28 border-b border-[#173D32]/12"
     >
       <div className="mx-auto max-w-[1060px] px-4 sm:px-8">
-        <FadeInUp>
+        <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#173D32]/15">
             <div className="space-y-3">
               <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#173D32]">
@@ -35,17 +35,17 @@ export function FAQAccordion() {
               de préparer votre projet.
             </p>
           </div>
-        </FadeInUp>
+        </ScrollReveal>
 
-        <div className="divide-y divide-[#173D32]/15 border-b border-[#173D32]/15">
-          {VERIFIED_FAQ.map((item, idx) => {
-            const isOpen = openId === item.id;
-            const panelId = `faq-panel-${item.id}`;
-            const buttonId = `faq-button-${item.id}`;
+        <ScrollReveal delayMs={90}>
+          <div className="divide-y divide-[#173D32]/15 border-b border-[#173D32]/15">
+            {VERIFIED_FAQ.map((item, idx) => {
+              const isOpen = openId === item.id;
+              const panelId = `faq-panel-${item.id}`;
+              const buttonId = `faq-button-${item.id}`;
 
-            return (
-              <FadeInUp key={item.id} delayMs={idx * 50}>
-                <div className="py-1">
+              return (
+                <div key={item.id} className="py-1">
                   <h3>
                     <button
                       id={buttonId}
@@ -90,10 +90,10 @@ export function FAQAccordion() {
                     </div>
                   </div>
                 </div>
-              </FadeInUp>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

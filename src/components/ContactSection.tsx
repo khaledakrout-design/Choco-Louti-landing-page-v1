@@ -6,8 +6,8 @@ import {
   validateContactForm,
   type ContactFormData,
 } from '../utils/chocoLogic';
-import { FadeInUp } from './FadeInUp';
 import { OrnamentDivider } from './OrnamentDivider';
+import { ScrollReveal } from './ScrollReveal';
 
 interface ContactSectionProps {
   selectedOccasion: string;
@@ -73,68 +73,57 @@ export function ContactSection({
       <div className="mx-auto max-w-[1360px] px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Editorial invitation & CTAs */}
-          <div className="lg:col-span-5 space-y-7">
-            <FadeInUp>
-              <div className="space-y-4">
-                <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#173D32]">
-                  Contact &amp; Sur-Mesure
-                </p>
-                <h2
-                  id="contact-heading"
-                  className="font-editorial font-normal text-[#173D32] text-[clamp(2rem,3.4vw,3.15rem)] leading-[1.12] text-balance"
-                >
-                  Imaginons votre prochaine création.
-                </h2>
-              </div>
-            </FadeInUp>
-
-            <FadeInUp delayMs={80}>
-              <OrnamentDivider tone="gold" align="left" />
-            </FadeInUp>
-
-            <FadeInUp delayMs={130}>
-              <p className="text-base sm:text-[17px] leading-[1.75] text-[#3B241D]/88">
-                Partagez votre occasion, votre inspiration ou simplement une
-                idée. Entrons en contact pour imaginer votre création.
+          <ScrollReveal className="lg:col-span-5 space-y-7">
+            <div className="space-y-4">
+              <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#173D32]">
+                Contact &amp; Sur-Mesure
               </p>
-            </FadeInUp>
+              <h2
+                id="contact-heading"
+                className="font-editorial font-normal text-[#173D32] text-[clamp(2rem,3.4vw,3.15rem)] leading-[1.12] text-balance"
+              >
+                Imaginons votre prochaine création.
+              </h2>
+            </div>
 
-            <FadeInUp delayMs={180}>
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  type="button"
-                  onClick={() => nameInputRef.current?.focus()}
-                  className="inline-flex items-center justify-center whitespace-nowrap shrink-0 bg-[#173D32] text-[#F3EBDD] hover:bg-[#3B241D] px-7 py-3.5 text-xs font-semibold tracking-[0.11em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
-                >
-                  Nous contacter
-                </button>
-                <a
-                  href="#creations"
-                  className="inline-flex items-center justify-center whitespace-nowrap shrink-0 border border-[#173D32]/35 text-[#173D32] hover:border-[#173D32] hover:bg-[#173D32]/5 px-6 py-3.5 text-xs font-medium tracking-[0.11em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#173D32]"
-                >
-                  Découvrir les créations
-                </a>
-              </div>
-            </FadeInUp>
+            <OrnamentDivider tone="gold" align="left" />
 
-            <FadeInUp delayMs={220}>
-              <div className="pt-6 border-t border-[#173D32]/15 text-xs leading-relaxed text-[#3B241D]/75 space-y-1.5">
-                <p className="font-medium uppercase tracking-[0.14em] text-[#173D32]">
-                  Information d’intégration
-                </p>
-                <p>
-                  Les coordonnées directes de la Maison et l’envoi automatisé de
-                  ce formulaire seront activés dès le raccordement du service de
-                  messagerie.
-                </p>
-              </div>
-            </FadeInUp>
-          </div>
+            <p className="text-base sm:text-[17px] leading-[1.75] text-[#3B241D]/88">
+              Partagez votre occasion, votre inspiration ou simplement une
+              idée. Entrons en contact pour imaginer votre création.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                type="button"
+                onClick={() => nameInputRef.current?.focus()}
+                className="inline-flex items-center justify-center whitespace-nowrap shrink-0 bg-[#173D32] text-[#F3EBDD] hover:bg-[#3B241D] px-7 py-3.5 text-xs font-semibold tracking-[0.11em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
+              >
+                Nous contacter
+              </button>
+              <a
+                href="#creations"
+                className="inline-flex items-center justify-center whitespace-nowrap shrink-0 border border-[#173D32]/35 text-[#173D32] hover:border-[#173D32] hover:bg-[#173D32]/5 px-6 py-3.5 text-xs font-medium tracking-[0.11em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#173D32]"
+              >
+                Découvrir les créations
+              </a>
+            </div>
+
+            <div className="pt-6 border-t border-[#173D32]/15 text-xs leading-relaxed text-[#3B241D]/75 space-y-1.5">
+              <p className="font-medium uppercase tracking-[0.14em] text-[#173D32]">
+                Information d’intégration
+              </p>
+              <p>
+                Les coordonnées directes de la Maison et l’envoi automatisé de
+                ce formulaire seront activés dès le raccordement du service de
+                messagerie.
+              </p>
+            </div>
+          </ScrollReveal>
 
           {/* Honest, validated bespoke inquiry form */}
-          <div className="lg:col-span-7">
-            <FadeInUp delayMs={100}>
-              <div className="bg-[#F3EBDD] border border-[#173D32]/20 p-6 sm:p-10 shadow-[0_20px_50px_-28px_rgba(23,61,50,0.2)]">
+          <ScrollReveal delayMs={100} className="lg:col-span-7">
+            <div className="bg-[#F3EBDD] border border-[#173D32]/20 p-6 sm:p-10 shadow-[0_20px_50px_-28px_rgba(23,61,50,0.2)]">
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
@@ -356,9 +345,8 @@ export function ContactSection({
                     </button>
                   </div>
                 )}
-              </div>
-            </FadeInUp>
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
 import { VERIFIED_CREATIONS, type CreationItem } from '../tokens/brand';
 import { getWrappedIndex } from '../utils/chocoLogic';
-import { FadeInUp } from './FadeInUp';
 import { ProductImage } from './ProductImage';
+import { ScrollReveal } from './ScrollReveal';
 
 export function CreationGallery() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -48,7 +48,7 @@ export function CreationGallery() {
       className="bg-[#F3EBDD] text-[#3B241D] py-20 sm:py-28"
     >
       <div className="mx-auto max-w-[1360px] px-4 sm:px-8">
-        <FadeInUp>
+        <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#173D32]/15">
             <div className="space-y-3 max-w-2xl">
               <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#173D32]">
@@ -67,20 +67,20 @@ export function CreationGallery() {
               signature.
             </p>
           </div>
-        </FadeInUp>
+        </ScrollReveal>
 
         {/* Asymmetric editorial gallery layout */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Dominant focal creation */}
-          <FadeInUp className="lg:col-span-7">
+          <ScrollReveal className="lg:col-span-7">
             <article className="group bg-[#DCE4D9]/40 border border-[#173D32]/12 p-4 sm:p-6">
-              <div className="relative aspect-[4/5] sm:aspect-[5/5] overflow-hidden bg-[#173D32]">
+              <div className="relative aspect-[4/4.6] sm:aspect-[5/5] overflow-hidden bg-[#173D32]">
                 <ProductImage
                   src={primary.image.src}
                   alt={primary.image.alt}
                   width={primary.image.width}
                   height={primary.image.height}
-                  imgClassName="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  imgClassName="object-cover object-[50%_50%] scale-[1.02] transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   fallbackLabel={primary.title}
                 />
                 <button
@@ -106,19 +106,19 @@ export function CreationGallery() {
                 </p>
               </div>
             </article>
-          </FadeInUp>
+          </ScrollReveal>
 
           {/* Right column: two distinct vertical proportions */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            <FadeInUp delayMs={90}>
+            <ScrollReveal delayMs={90}>
               <article className="group border border-[#C5A45A]/35 bg-[#F3EBDD] p-4">
-                <div className="relative aspect-[3/4] max-w-[380px] mx-auto overflow-hidden bg-[#F3EBDD]">
+                <div className="relative aspect-[4/4.6] max-w-[380px] mx-auto overflow-hidden bg-[#F3EBDD]">
                   <ProductImage
                     src={secondary.image.src}
                     alt={secondary.image.alt}
                     width={secondary.image.width}
                     height={secondary.image.height}
-                    imgClassName="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    imgClassName="object-cover object-[50%_46%] scale-[1.06] transition-transform duration-700 ease-out group-hover:scale-[1.08]"
                     fallbackLabel={secondary.title}
                   />
                   <button
@@ -143,18 +143,18 @@ export function CreationGallery() {
                   </p>
                 </div>
               </article>
-            </FadeInUp>
+            </ScrollReveal>
 
-            <FadeInUp delayMs={160}>
+            <ScrollReveal delayMs={160}>
               <article className="group bg-[#173D32] text-[#F3EBDD] p-4 border border-[#C5A45A]/40">
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                  <div className="sm:col-span-5 relative aspect-[4/5] overflow-hidden bg-[#173D32]">
+                  <div className="sm:col-span-5 relative aspect-[4/4.6] overflow-hidden bg-[#173D32]">
                     <ProductImage
                       src={detail.image.src}
                       alt={detail.image.alt}
                       width={detail.image.width}
                       height={detail.image.height}
-                      imgClassName="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      imgClassName="object-cover object-[50%_49%] scale-[1.05] transition-transform duration-700 ease-out group-hover:scale-[1.08]"
                       fallbackLabel={detail.title}
                     />
                   </div>
@@ -179,7 +179,7 @@ export function CreationGallery() {
                   </div>
                 </div>
               </article>
-            </FadeInUp>
+            </ScrollReveal>
           </div>
         </div>
       </div>

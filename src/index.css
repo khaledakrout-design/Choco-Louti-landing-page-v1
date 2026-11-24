@@ -27,32 +27,16 @@
 
 .reveal-base {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translate3d(0, 18px, 0);
   transition:
-    opacity 640ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 580ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 580ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-}
-
-@keyframes chocoFadeInUp {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 22px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.hero-fade-in-up {
-  animation: chocoFadeInUp 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  will-change: opacity, transform;
 }
 
 @keyframes scrollCueDrop {
@@ -120,7 +104,6 @@
   }
 
   .reveal-base,
-  .hero-fade-in-up,
   .scroll-cue-drop {
     opacity: 1;
     transform: none;

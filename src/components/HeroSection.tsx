@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { BRAND_ASSETS } from '../tokens/brand';
 import { OrnamentDivider } from './OrnamentDivider';
@@ -6,15 +6,22 @@ import { ProductImage } from './ProductImage';
 import { ScrollReveal } from './ScrollReveal';
 
 export function HeroSection() {
+  const topSentinelRef = useRef<HTMLDivElement | null>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 40);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const sentinel = topSentinelRef.current;
+    if (!sentinel || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHasScrolled(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -23,120 +30,118 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative bg-[#173D32] text-[#F3EBDD] overflow-hidden"
     >
-      {/* Subtle architectural hairline frame inside Deep Green canvas */}
-      <div className="mx-auto max-w-[1360px] px-4 sm:px-8 pt-8 pb-8 sm:pt-12 sm:pb-10 lg:pt-10 lg:pb-6 xl:pt-11 xl:pb-7">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Editorial typography column */}
-          <div className="lg:col-span-6 space-y-7 lg:pr-4">
-            <ScrollReveal delayMs={0}>
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-[#C5A45A]" aria-hidden="true" />
-                <p className="text-[11px] sm:text-xs font-medium tracking-[0.24em] uppercase text-[#C5A45A]">
-                  L’art du chocolat sur mesure
-                </p>
-              </div>
-            </ScrollReveal>
+      {/* Top 44px sentinel to fade out scroll cue cleanly via IntersectionObserver */}
+      <div
+        ref={topSentinelRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 h-11 w-px"
+      />
+
+      <div className="mx-auto max-w-[1360px] px-4 sm:px-8 pt-6 pb-6 sm:pt-10 sm:pb-9 lg:pt-9 lg:pb-6 xl:pt-10 xl:pb-7">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-5 sm:gap-y-7 lg:gap-x-12 lg:gap-y-6 items-center">
+          {/* Block 1: Editorial eyebrow + headline (top on mobile, left-top on desktop) */}
+          <ScrollReveal
+            delayMs={0}
+            className="lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:self-end space-y-3 sm:space-y-4 lg:pr-2"
+          >
+            <div className="flex items-center gap-3">
+              <span className="h-px w-7 sm:w-8 bg-[#C5A45A]" aria-hidden="true" />
+              <p className="text-[11px] sm:text-xs font-medium tracking-[0.22em] uppercase text-[#C5A45A]">
+                L’art du chocolat sur mesure
+              </p>
+            </div>
 
             <h1
               id="hero-heading"
-              className="font-editorial font-normal text-[#F3EBDD] text-[clamp(2.5rem,4.6vw,4.35rem)] leading-[1.06] tracking-[-0.015em] text-balance"
+              className="font-editorial font-normal text-[#F3EBDD] text-[clamp(2.15rem,4.3vw,4.15rem)] leading-[1.05] tracking-[-0.015em] text-balance"
             >
-              <ScrollReveal as="span" delayMs={90}>
-                Le chocolat prend
-              </ScrollReveal>
-              <ScrollReveal as="span" delayMs={180}>
-                une autre{' '}
-                <span className="italic text-[#C5A45A]">dimension.</span>
-              </ScrollReveal>
+              Le chocolat prend une autre{' '}
+              <span className="italic text-[#C5A45A]">dimension.</span>
             </h1>
+          </ScrollReveal>
 
-            <ScrollReveal delayMs={260}>
-              <p className="max-w-xl text-base sm:text-[17px] leading-[1.7] text-[#F3EBDD]/88 font-normal">
-                Des créations chocolatées personnalisées, pensées pour célébrer
-                les instants précieux et sublimer l’art d’offrir.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal delayMs={340}>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
-                <a
-                  href="#creations"
-                  className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap shrink-0 bg-[#C5A45A] text-[#173D32] hover:bg-[#F3EBDD] px-7 py-3.5 text-xs font-semibold tracking-[0.11em] uppercase transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3EBDD]"
-                >
-                  <span>Découvrir les créations</span>
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </a>
-
-                <a
-                  href="#personnalisation"
-                  className="inline-flex items-center justify-center whitespace-nowrap shrink-0 border border-[#F3EBDD]/45 text-[#F3EBDD] hover:border-[#C5A45A] hover:text-[#C5A45A] px-7 py-3.5 text-xs font-medium tracking-[0.11em] uppercase transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
-                >
-                  Imaginer une création
-                </a>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delayMs={420}>
-              <div className="pt-4 border-t border-[#C5A45A]/25 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-x-5 gap-y-1.5 text-xs text-[#DCE4D9]/85 tracking-[0.04em]">
-                <span>Fleurs en chocolat personnalisées</span>
-                <span aria-hidden="true" className="hidden sm:inline text-[#C5A45A]">
-                  ·
-                </span>
-                <span>Chocolat noir &amp; chocolat blanc</span>
-                <span aria-hidden="true" className="hidden sm:inline text-[#C5A45A]">
-                  ·
-                </span>
-                <span>Coffrets &amp; attentions sur mesure</span>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Asymmetrical product photography composition */}
-          <div className="lg:col-span-6">
-            <div className="relative mx-auto max-w-[470px] lg:max-w-[465px] xl:max-w-[495px] lg:ml-auto">
-              {/* Warm Ivory framing layer */}
-              <div className="bg-[#F3EBDD] p-3 sm:p-3.5 border border-[#C5A45A]/45 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)]">
-                <div className="relative aspect-[5/5.6] overflow-hidden bg-[#173D32]">
+          {/* Block 2: Dominant asymmetric product showcase (immediately visible on mobile, right span on desktop) */}
+          <ScrollReveal
+            delayMs={90}
+            className="lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:row-span-2"
+          >
+            <div className="relative mx-auto max-w-[540px] lg:max-w-[590px] xl:max-w-[630px] lg:ml-auto">
+              <div className="bg-[#F3EBDD] p-2.5 sm:p-3.5 border border-[#C5A45A]/50 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.48)]">
+                <div className="relative aspect-[4/3.1] sm:aspect-[5/4.8] lg:aspect-[10/9.8] overflow-hidden bg-[#173D32]">
                   <ProductImage
                     src={BRAND_ASSETS.signatureGiftbox.src}
                     alt={BRAND_ASSETS.signatureGiftbox.alt}
                     width={BRAND_ASSETS.signatureGiftbox.width}
                     height={BRAND_ASSETS.signatureGiftbox.height}
                     priority
-                    imgClassName="object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.02]"
+                    imgClassName="object-cover object-[50%_44%] sm:object-[50%_50%] scale-[1.02] transition-transform duration-700 ease-out hover:scale-[1.04]"
                     fallbackLabel="Coffret Signature — Fleurs en chocolat"
                   />
                 </div>
 
-                <div className="pt-3.5 pb-1 px-1 flex items-center justify-between gap-4 text-[#3B241D]">
-                  <span className="font-editorial italic text-base sm:text-lg">
-                    Coffret Signature · Fleurs en chocolat
+                <div className="pt-2.5 sm:pt-3.5 pb-0.5 px-1 flex items-center justify-between gap-4 text-[#3B241D]">
+                  <span className="font-editorial italic text-sm sm:text-lg">
+                    Coffret Signature · Fleurs en chocolat personnalisées
                   </span>
                   <OrnamentDivider tone="gold" align="left" className="hidden sm:flex" />
                 </div>
               </div>
 
-              {/* Overlapping intimate rose detail inset on desktop */}
-              <div className="hidden md:block absolute -left-10 bottom-14 w-32 lg:w-36 bg-[#F3EBDD] p-2 border border-[#C5A45A]/55 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.5)]">
-                <div className="aspect-[4/5] overflow-hidden bg-[#173D32]">
+              {/* Intimate sculpted rose detail inset on tablet/desktop */}
+              <div className="hidden md:block absolute -left-8 lg:-left-10 bottom-12 w-32 lg:w-36 xl:w-40 bg-[#F3EBDD] p-2 border border-[#C5A45A]/60 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.52)]">
+                <div className="aspect-[4/4.6] overflow-hidden bg-[#173D32]">
                   <ProductImage
                     src={BRAND_ASSETS.macroRose.src}
                     alt={BRAND_ASSETS.macroRose.alt}
                     width={BRAND_ASSETS.macroRose.width}
                     height={BRAND_ASSETS.macroRose.height}
                     priority
-                    imgClassName="object-cover object-center"
+                    imgClassName="object-cover object-[50%_49%] scale-[1.05]"
                     fallbackLabel="Rose en chocolat noir"
                   />
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
+
+          {/* Block 3: Concise storytelling, primary CTAs, and signature details */}
+          <ScrollReveal
+            delayMs={150}
+            className="lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:self-start space-y-5 sm:space-y-6 lg:pr-2"
+          >
+            <p className="max-w-lg text-[15px] sm:text-[17px] leading-[1.65] sm:leading-[1.7] text-[#F3EBDD]/88 font-normal">
+              Des fleurs en chocolat noir et blanc sculptées avec délicatesse,
+              réunies en coffret signature pour sublimer l’art d’offrir.
+            </p>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <a
+                href="#creations"
+                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap shrink-0 bg-[#C5A45A] text-[#173D32] hover:bg-[#F3EBDD] px-6 sm:px-7 py-3.5 text-xs font-semibold tracking-[0.11em] uppercase transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3EBDD]"
+              >
+                <span>Découvrir les créations</span>
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+
+              <a
+                href="#personnalisation"
+                className="inline-flex items-center justify-center whitespace-nowrap shrink-0 border border-[#F3EBDD]/45 text-[#F3EBDD] hover:border-[#C5A45A] hover:text-[#C5A45A] px-6 sm:px-7 py-3.5 text-xs font-medium tracking-[0.11em] uppercase transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
+              >
+                Imaginer une création
+              </a>
+            </div>
+
+            <p className="pt-3.5 border-t border-[#C5A45A]/25 text-[11px] sm:text-xs text-[#DCE4D9]/85 tracking-[0.05em] leading-relaxed">
+              Fleurs en chocolat personnalisées <span className="text-[#C5A45A] mx-1.5">·</span>{' '}
+              Collerettes en dentelle <span className="text-[#C5A45A] mx-1.5">·</span>{' '}
+              Écrins sur mesure
+            </p>
+          </ScrollReveal>
         </div>
 
-        {/* Subtle animated scroll-down indicator that fades out once user scrolls */}
+        {/* Subtle animated scroll-down indicator that fades out on scroll */}
         <div
-          className={`mt-8 lg:mt-4 flex justify-center transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`mt-5 lg:mt-4 flex justify-center transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             hasScrolled
               ? 'opacity-0 translate-y-2 pointer-events-none'
               : 'opacity-100 translate-y-0'
@@ -146,17 +151,17 @@ export function HeroSection() {
             href="#maison"
             aria-label="Découvrir La Maison — défiler vers le bas"
             tabIndex={hasScrolled ? -1 : 0}
-            className="group inline-flex flex-col items-center gap-2 py-1 px-4 text-[#C5A45A] hover:text-[#F3EBDD] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A45A]"
+            className="group inline-flex flex-col items-center gap-1.5 py-1 px-4 text-[#C5A45A] hover:text-[#F3EBDD] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A45A]"
           >
             <span className="text-[10px] font-medium tracking-[0.26em] uppercase text-[#C5A45A]/90 group-hover:text-[#F3EBDD] transition-colors">
               Défiler
             </span>
             <span
               aria-hidden="true"
-              className="relative flex items-center justify-center w-7 h-10 bg-[#173D32] border border-[#C5A45A]/45 group-hover:border-[#C5A45A] transition-colors overflow-hidden"
+              className="relative flex items-center justify-center w-7 h-9 bg-[#173D32] border border-[#C5A45A]/45 group-hover:border-[#C5A45A] transition-colors overflow-hidden"
             >
-              <span className="absolute top-1.5 w-px h-3.5 bg-[#C5A45A] scroll-cue-drop" />
-              <ChevronDown className="w-3.5 h-3.5 mt-4 text-[#C5A45A] group-hover:text-[#F3EBDD] transition-colors" />
+              <span className="absolute top-1.5 w-px h-3 bg-[#C5A45A] scroll-cue-drop" />
+              <ChevronDown className="w-3.5 h-3.5 mt-3.5 text-[#C5A45A] group-hover:text-[#F3EBDD] transition-colors" />
             </span>
           </a>
         </div>

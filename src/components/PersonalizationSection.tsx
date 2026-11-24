@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { OCCASIONS, type OccasionLabel } from '../utils/chocoLogic';
-import { FadeInUp } from './FadeInUp';
 import { OrnamentDivider } from './OrnamentDivider';
+import { ScrollReveal } from './ScrollReveal';
 
 const STAGES = [
   {
@@ -40,7 +40,7 @@ export function PersonalizationSection({
       className="bg-[#173D32] text-[#F3EBDD] py-20 sm:py-28"
     >
       <div className="mx-auto max-w-[1360px] px-4 sm:px-8">
-        <FadeInUp>
+        <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center space-y-5">
             <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#C5A45A]">
               Personnalisation
@@ -53,13 +53,16 @@ export function PersonalizationSection({
             </h2>
             <OrnamentDivider tone="gold" align="center" className="pt-2" />
           </div>
-        </FadeInUp>
+        </ScrollReveal>
 
         {/* Three editorial presentation stages */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-          {STAGES.map((stage, idx) => (
-            <FadeInUp key={stage.number} delayMs={idx * 80}>
-              <div className="h-full border-t border-[#C5A45A]/55 pt-7 space-y-4">
+        <ScrollReveal delayMs={90}>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            {STAGES.map((stage) => (
+              <div
+                key={stage.number}
+                className="h-full border-t border-[#C5A45A]/55 pt-7 space-y-4"
+              >
                 <div className="flex items-baseline justify-between">
                   <span className="font-editorial italic text-4xl text-[#C5A45A] tabular-nums">
                     {stage.number}
@@ -73,12 +76,12 @@ export function PersonalizationSection({
                   {stage.description}
                 </p>
               </div>
-            </FadeInUp>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
 
         {/* Interactive occasion pre-selector + primary CTA */}
-        <FadeInUp delayMs={200}>
+        <ScrollReveal delayMs={160}>
           <div className="mt-14 pt-10 border-t border-[#F3EBDD]/15 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="space-y-3">
               <p className="text-xs tracking-[0.18em] uppercase text-[#DCE4D9]/85">
@@ -118,7 +121,7 @@ export function PersonalizationSection({
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
-        </FadeInUp>
+        </ScrollReveal>
       </div>
     </section>
   );

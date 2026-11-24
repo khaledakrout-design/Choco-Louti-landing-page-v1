@@ -12,8 +12,8 @@ interface ScrollRevealProps {
 export function ScrollReveal({
   children,
   delayMs = 0,
-  threshold = 0.1,
-  rootMargin = '0px 0px -24px 0px',
+  threshold = 0.08,
+  rootMargin = '0px 0px -16px 0px',
   className = '',
   as = 'div',
 }: ScrollRevealProps) {
@@ -34,6 +34,17 @@ export function ScrollReveal({
     if (!node) return;
 
     let rafId: number | null = null;
+
+    // Immediately reveal elements already within the initial viewport
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.96 && rect.bottom > 0) {
+      rafId = window.requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
+      return () => {
+        if (rafId !== null) window.cancelAnimationFrame(rafId);
+      };
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

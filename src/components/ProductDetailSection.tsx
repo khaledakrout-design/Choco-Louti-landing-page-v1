@@ -1,7 +1,7 @@
 import { BRAND_ASSETS } from '../tokens/brand';
-import { FadeInUp } from './FadeInUp';
 import { OrnamentDivider } from './OrnamentDivider';
 import { ProductImage } from './ProductImage';
+import { ScrollReveal } from './ScrollReveal';
 
 const DETAIL_NOTES = [
   {
@@ -29,13 +29,13 @@ export function ProductDetailSection() {
     <section
       id="savoir-faire"
       aria-labelledby="detail-heading"
-      className="bg-[#3B241D] text-[#F3EBDD] py-20 sm:py-28"
+      className="bg-[#3B241D] text-[#F3EBDD] py-16 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-[1360px] px-4 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Editorial prose and tactile details */}
-          <div className="lg:col-span-6 space-y-8">
-            <FadeInUp>
+          <div className="lg:col-span-6 space-y-7 sm:space-y-8">
+            <ScrollReveal className="space-y-6">
               <div className="space-y-4">
                 <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#C5A45A]">
                   L’Art du Chocolat
@@ -47,24 +47,20 @@ export function ProductDetailSection() {
                   La beauté se cache dans chaque détail.
                 </h2>
               </div>
-            </FadeInUp>
 
-            <FadeInUp delayMs={80}>
               <OrnamentDivider tone="gold" align="left" />
-            </FadeInUp>
 
-            <FadeInUp delayMs={130}>
               <p className="text-base sm:text-[17px] leading-[1.75] text-[#F3EBDD]/85 max-w-xl">
                 Observer une fleur en chocolat CHOCO LOUTI de près, c’est
                 découvrir le dialogue entre la matière gourmande, la précision du
                 geste et l’élégance d’une mise en scène épurée.
               </p>
-            </FadeInUp>
+            </ScrollReveal>
 
-            <div className="divide-y divide-[#C5A45A]/25 border-t border-b border-[#C5A45A]/25">
-              {DETAIL_NOTES.map((item, idx) => (
-                <FadeInUp key={item.index} delayMs={160 + idx * 60}>
-                  <div className="py-5 flex items-start gap-5">
+            <ScrollReveal delayMs={100}>
+              <div className="divide-y divide-[#C5A45A]/25 border-t border-b border-[#C5A45A]/25">
+                {DETAIL_NOTES.map((item) => (
+                  <div key={item.index} className="py-5 flex items-start gap-5">
                     <span className="font-editorial italic text-xl text-[#C5A45A] tabular-nums shrink-0 pt-0.5">
                       {item.index}
                     </span>
@@ -77,22 +73,22 @@ export function ProductDetailSection() {
                       </p>
                     </div>
                   </div>
-                </FadeInUp>
-              ))}
-            </div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Intimate macro product photograph */}
           <div className="lg:col-span-6">
-            <FadeInUp delayMs={120}>
+            <ScrollReveal delayMs={120}>
               <div className="mx-auto max-w-[520px] lg:max-w-none border border-[#C5A45A]/45 p-3 sm:p-4 bg-[#173D32]">
-                <div className="aspect-[4/5] overflow-hidden bg-[#173D32]">
+                <div className="aspect-[4/4.6] overflow-hidden bg-[#173D32]">
                   <ProductImage
                     src={BRAND_ASSETS.macroRose.src}
                     alt={BRAND_ASSETS.macroRose.alt}
                     width={BRAND_ASSETS.macroRose.width}
                     height={BRAND_ASSETS.macroRose.height}
-                    imgClassName="object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.03]"
+                    imgClassName="object-cover object-[50%_49%] scale-[1.04] transition-transform duration-700 ease-out hover:scale-[1.07]"
                     fallbackLabel="Détail macro — Rose en chocolat noir"
                   />
                 </div>
@@ -101,7 +97,7 @@ export function ProductDetailSection() {
                   <span className="text-[#F3EBDD]/70">Présentation dentelle</span>
                 </p>
               </div>
-            </FadeInUp>
+            </ScrollReveal>
           </div>
         </div>
       </div>

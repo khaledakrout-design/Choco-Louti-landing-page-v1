@@ -19,34 +19,46 @@ export function OrnamentDivider({
     >
       {align === 'center' && (
         <span
-          className="h-px w-12 sm:w-16 opacity-60"
+          className="h-px w-10 sm:w-14 opacity-55"
           style={{ backgroundColor: strokeColor }}
         />
       )}
-      {/* Geometric diamond ornament derived from CHOCO LOUTI Color Chart V1.0 */}
+      {/* Dual cocoa-leaf emblem derived directly from the official CHOCO LOUTI logo */}
       <svg
-        width="26"
-        height="18"
-        viewBox="0 0 26 18"
+        width="24"
+        height="16"
+        viewBox="0 0 24 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="shrink-0"
       >
         <path
-          d="M13 1L24.5 9L13 17L1.5 9L13 1Z"
+          d="M11.2 13.5C7.2 13.1 4.2 10.2 3.5 5.2C7.8 5.4 10.7 8.1 11.2 13.5Z"
           stroke={strokeColor}
-          strokeWidth="1"
+          strokeWidth="1.1"
+          strokeLinejoin="round"
         />
         <path
-          d="M13 4L20.5 9L13 14L5.5 9L13 4Z"
+          d="M6.3 8.1C8 9.6 9.5 11.3 11 13.3"
           stroke={strokeColor}
-          strokeWidth="0.75"
-          strokeOpacity="0.65"
+          strokeWidth="0.9"
+          strokeLinecap="round"
         />
-        <circle cx="13" cy="9" r="1.75" fill={strokeColor} />
+        <path
+          d="M12.8 13.5C13.3 7.4 16.4 4.2 21 3.5C20.2 8.9 17.2 12.6 12.8 13.5Z"
+          stroke={strokeColor}
+          strokeWidth="1.1"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M17.8 6.8C15.9 8.6 14.3 10.7 12.9 13.3"
+          stroke={strokeColor}
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
       </svg>
       <span
-        className="h-px w-12 sm:w-16 opacity-60"
+        className="h-px w-10 sm:w-14 opacity-55"
         style={{ backgroundColor: strokeColor }}
       />
     </div>
