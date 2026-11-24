@@ -73,21 +73,35 @@ export function CreationGallery() {
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Dominant focal creation */}
           <ScrollReveal className="lg:col-span-7">
-            <article className="group bg-[#DCE4D9]/40 border border-[#173D32]/12 p-4 sm:p-6">
+            <article className="group bg-[#DCE4D9]/40 border border-[#173D32]/12 p-4 sm:p-6 transition-all duration-500 ease-out hover:border-[#C5A45A]/65 hover:shadow-[0_22px_50px_-24px_rgba(23,61,50,0.28)]">
               <div className="relative aspect-[4/4.6] sm:aspect-[5/5] overflow-hidden bg-[#173D32]">
                 <ProductImage
                   src={primary.image.src}
                   alt={primary.image.alt}
                   width={primary.image.width}
                   height={primary.image.height}
-                  imgClassName="object-cover object-[50%_50%] scale-[1.02] transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                  imgClassName="object-cover object-[50%_50%] scale-[1.02] opacity-100 transition-all duration-700 ease-out group-hover:opacity-0 group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:opacity-100 motion-reduce:group-hover:scale-[1.02]"
                   fallbackLabel={primary.title}
                 />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100 motion-reduce:hidden"
+                >
+                  <ProductImage
+                    src={primary.image.src}
+                    alt=""
+                    width={primary.image.width}
+                    height={primary.image.height}
+                    imgClassName="object-cover object-[56%_68%] scale-[1.52] transition-transform duration-700 ease-out group-hover:scale-[1.58]"
+                    fallbackLabel={primary.title}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#173D32]/25 via-transparent to-transparent" />
+                </div>
                 <button
                   type="button"
                   onClick={() => setActiveIndex(0)}
                   aria-label={`Agrandir la photographie : ${primary.title}`}
-                  className="absolute bottom-4 right-4 inline-flex items-center gap-2 bg-[#173D32]/90 text-[#F3EBDD] hover:bg-[#173D32] border border-[#C5A45A]/60 px-4 py-2 text-xs tracking-[0.08em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
+                  className="absolute bottom-4 right-4 z-10 inline-flex items-center gap-2 bg-[#173D32]/90 text-[#F3EBDD] hover:bg-[#173D32] border border-[#C5A45A]/60 group-hover:border-[#C5A45A] px-4 py-2 text-xs tracking-[0.08em] uppercase transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A45A]"
                 >
                   <Expand className="w-3.5 h-3.5 text-[#C5A45A]" aria-hidden="true" />
                   <span>Observer en grand</span>
@@ -111,21 +125,35 @@ export function CreationGallery() {
           {/* Right column: two distinct vertical proportions */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <ScrollReveal delayMs={90}>
-              <article className="group border border-[#C5A45A]/35 bg-[#F3EBDD] p-4">
+              <article className="group border border-[#C5A45A]/35 bg-[#F3EBDD] p-4 transition-all duration-500 ease-out hover:border-[#C5A45A]/80 hover:shadow-[0_20px_44px_-22px_rgba(23,61,50,0.24)]">
                 <div className="relative aspect-[4/4.6] max-w-[380px] mx-auto overflow-hidden bg-[#F3EBDD]">
                   <ProductImage
                     src={secondary.image.src}
                     alt={secondary.image.alt}
                     width={secondary.image.width}
                     height={secondary.image.height}
-                    imgClassName="object-cover object-[50%_46%] scale-[1.06] transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                    imgClassName="object-cover object-[50%_46%] scale-[1.06] opacity-100 transition-all duration-700 ease-out group-hover:opacity-0 group-hover:scale-[1.09] motion-reduce:transition-none motion-reduce:group-hover:opacity-100 motion-reduce:group-hover:scale-[1.06]"
                     fallbackLabel={secondary.title}
                   />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100 motion-reduce:hidden"
+                  >
+                    <ProductImage
+                      src={secondary.image.src}
+                      alt=""
+                      width={secondary.image.width}
+                      height={secondary.image.height}
+                      imgClassName="object-cover object-[50%_54%] scale-[1.38] transition-transform duration-700 ease-out group-hover:scale-[1.44]"
+                      fallbackLabel={secondary.title}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#3B241D]/15 via-transparent to-transparent" />
+                  </div>
                   <button
                     type="button"
                     onClick={() => setActiveIndex(1)}
                     aria-label={`Agrandir la photographie : ${secondary.title}`}
-                    className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 bg-[#F3EBDD]/95 text-[#173D32] hover:bg-[#173D32] hover:text-[#F3EBDD] border border-[#173D32]/25 px-3 py-1.5 text-[11px] tracking-[0.08em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#173D32]"
+                    className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 bg-[#F3EBDD]/95 text-[#173D32] hover:bg-[#173D32] hover:text-[#F3EBDD] border border-[#173D32]/25 group-hover:border-[#C5A45A] px-3 py-1.5 text-[11px] tracking-[0.08em] uppercase transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#173D32]"
                   >
                     <Expand className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>Voir</span>
@@ -146,7 +174,7 @@ export function CreationGallery() {
             </ScrollReveal>
 
             <ScrollReveal delayMs={160}>
-              <article className="group bg-[#173D32] text-[#F3EBDD] p-4 border border-[#C5A45A]/40">
+              <article className="group bg-[#173D32] text-[#F3EBDD] p-4 border border-[#C5A45A]/40 transition-all duration-500 ease-out hover:border-[#C5A45A] hover:shadow-[0_20px_44px_-20px_rgba(0,0,0,0.4)]">
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
                   <div className="sm:col-span-5 relative aspect-[4/4.6] overflow-hidden bg-[#173D32]">
                     <ProductImage
@@ -154,9 +182,22 @@ export function CreationGallery() {
                       alt={detail.image.alt}
                       width={detail.image.width}
                       height={detail.image.height}
-                      imgClassName="object-cover object-[50%_49%] scale-[1.05] transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                      imgClassName="object-cover object-[50%_49%] scale-[1.05] opacity-100 transition-all duration-700 ease-out group-hover:opacity-0 group-hover:scale-[1.08] motion-reduce:transition-none motion-reduce:group-hover:opacity-100 motion-reduce:group-hover:scale-[1.05]"
                       fallbackLabel={detail.title}
                     />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100 motion-reduce:hidden"
+                    >
+                      <ProductImage
+                        src={detail.image.src}
+                        alt=""
+                        width={detail.image.width}
+                        height={detail.image.height}
+                        imgClassName="object-cover object-[52%_50%] scale-[1.34] transition-transform duration-700 ease-out group-hover:scale-[1.4]"
+                        fallbackLabel={detail.title}
+                      />
+                    </div>
                   </div>
                   <div className="sm:col-span-7 space-y-2.5 sm:pl-2">
                     <p className="text-[11px] tracking-[0.18em] uppercase text-[#C5A45A] font-medium">

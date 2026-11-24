@@ -141,7 +141,8 @@ export function HeroSection() {
 
         {/* Subtle animated scroll-down indicator that fades out on scroll */}
         <div
-          className={`mt-5 lg:mt-4 flex justify-center transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          aria-hidden={hasScrolled}
+          className={`mt-5 lg:mt-4 flex justify-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             hasScrolled
               ? 'opacity-0 translate-y-2 pointer-events-none'
               : 'opacity-100 translate-y-0'
