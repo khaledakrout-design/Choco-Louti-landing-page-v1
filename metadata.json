@@ -1,0 +1,6 @@
+{
+  "name": "CHOCO LOUTI — L'Art du Chocolat Sur Mesure",
+  "description": "Maison de chocolat artisanal et créations chocolatées personnalisées pour célébrer les instants précieux et sublimer l'art d'offrir.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

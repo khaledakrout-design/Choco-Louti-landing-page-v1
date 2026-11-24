@@ -1,0 +1,100 @@
+import { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
+import { VERIFIED_FAQ } from '../tokens/brand';
+import { FadeInUp } from './FadeInUp';
+
+export function FAQAccordion() {
+  const [openId, setOpenId] = useState<string | null>(VERIFIED_FAQ[0].id);
+
+  const toggleItem = (id: string) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
+
+  return (
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      className="bg-[#DCE4D9]/55 text-[#3B241D] py-20 sm:py-28 border-b border-[#173D32]/12"
+    >
+      <div className="mx-auto max-w-[1060px] px-4 sm:px-8">
+        <FadeInUp>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#173D32]/15">
+            <div className="space-y-3">
+              <p className="text-xs font-medium tracking-[0.22em] uppercase text-[#173D32]">
+                Foire aux questions
+              </p>
+              <h2
+                id="faq-heading"
+                className="font-editorial font-normal text-[#173D32] text-[clamp(2rem,3.4vw,3.15rem)] leading-[1.12] text-balance"
+              >
+                Vos questions, nos réponses.
+              </h2>
+            </div>
+            <p className="text-sm text-[#3B241D]/80 max-w-sm">
+              Pour toute demande spécifique, notre espace de contact vous permet
+              de préparer votre projet.
+            </p>
+          </div>
+        </FadeInUp>
+
+        <div className="divide-y divide-[#173D32]/15 border-b border-[#173D32]/15">
+          {VERIFIED_FAQ.map((item, idx) => {
+            const isOpen = openId === item.id;
+            const panelId = `faq-panel-${item.id}`;
+            const buttonId = `faq-button-${item.id}`;
+
+            return (
+              <FadeInUp key={item.id} delayMs={idx * 50}>
+                <div className="py-1">
+                  <h3>
+                    <button
+                      id={buttonId}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => toggleItem(item.id)}
+                      className="w-full py-5 sm:py-6 flex items-center justify-between gap-6 text-left group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#173D32]"
+                    >
+                      <span className="flex items-baseline gap-4">
+                        <span className="font-editorial italic text-lg text-[#B9875B] tabular-nums shrink-0">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-editorial text-xl sm:text-2xl text-[#173D32] group-hover:text-[#3B241D] transition-colors">
+                          {item.question}
+                        </span>
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="inline-flex items-center justify-center w-9 h-9 border border-[#173D32]/25 text-[#173D32] group-hover:border-[#C5A45A] shrink-0 transition-colors"
+                      >
+                        {isOpen ? (
+                          <Minus className="w-4 h-4" />
+                        ) : (
+                          <Plus className="w-4 h-4" />
+                        )}
+                      </span>
+                    </button>
+                  </h3>
+
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    data-open={isOpen}
+                    className="accordion-panel"
+                  >
+                    <div className="accordion-inner">
+                      <p className="pb-6 pl-9 sm:pl-10 pr-4 max-w-3xl text-sm sm:text-base leading-[1.75] text-[#3B241D]/88">
+                        {item.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeInUp>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
